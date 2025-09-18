@@ -7,7 +7,7 @@ import java.net.Socket;
 public class Cliente {
     public static void main(String[] args) {
         try (
-                Socket socket = new Socket("localhost", 8081);
+                Socket socket = new Socket("localhost", 8080);
                 PrintWriter escritor = new PrintWriter(socket.getOutputStream(), true);
                 BufferedReader lectorServidor = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in))
@@ -66,8 +66,23 @@ public class Cliente {
                     while (!(linea = lectorServidor.readLine()).equals("FIN_MENSAJES")) {
                         System.out.println(linea);
                     }
+                }else if ("3".equals(opcionMenu)) { // BORRAR MENSAJE
+                    String linea;
+                    while (!(linea = lectorServidor.readLine()).equals("FIN_LISTA_BORRAR")) {
+                        System.out.println(linea);
+                    }
+                    String primeraRespuesta = lectorServidor.readLine();
+                    if (primeraRespuesta.equals("No tienes mensajes para borrar.")){
+                        System.out.println("Servidor: " + primeraRespuesta);
+                    } else {
+                        System.out.println("Servidor: " + primeraRespuesta);
+                        System.out.print("> ");
+                        String seleccion = teclado.readLine();
+                        escritor.println(seleccion);
+                        System.out.println("Servidor: " + lectorServidor.readLine());
+                    }
 
-                } else if ("3".equals(opcionMenu)) { // SALIR
+                }else if ("4".equals(opcionMenu)) { // SALIR
                     System.out.println("Desconectando del servidor...");
                     break;
 
@@ -86,7 +101,8 @@ public class Cliente {
         System.out.println("Elige una opción:");
         System.out.println("[1] Enviar un mensaje a otro usuario");
         System.out.println("[2] Leer mis mensajes");
-        System.out.println("[3] Salir");
+        System.out.println("[3] Borrar un mensaje");
+        System.out.println("[4] Salir");
         System.out.print("> ");
     }
 
