@@ -35,7 +35,6 @@ public class Cliente {
             String respuestaAuth = lectorServidor.readLine();
             System.out.println("Servidor: " + respuestaAuth);
 
-            // Si la autenticación falla, el programa termina
             if (!respuestaAuth.contains("Autenticación exitosa") && !respuestaAuth.contains("registrado exitosamente")) {
                 System.out.println("No se pudo iniciar sesión.");
                 return;
@@ -46,7 +45,7 @@ public class Cliente {
                 String opcionMenu = teclado.readLine();
                 escritor.println(opcionMenu);
 
-                if ("1".equals(opcionMenu)) { //ENVIAR MENSAJES
+                if ("1".equals(opcionMenu)) { // ENVIAR MENSAJES
                     System.out.println("Servidor: " + lectorServidor.readLine());
                     String destinatario = teclado.readLine();
                     escritor.println(destinatario);
@@ -57,7 +56,6 @@ public class Cliente {
                     if (!respuestaDestinatario.startsWith("Error:")) {
                         String mensaje = teclado.readLine();
                         escritor.println(mensaje);
-
                         System.out.println("Servidor: " + lectorServidor.readLine());
                     }
 
@@ -66,28 +64,30 @@ public class Cliente {
                     while (!(linea = lectorServidor.readLine()).equals("FIN_MENSAJES")) {
                         System.out.println(linea);
                     }
-                }else if ("3".equals(opcionMenu)) { // BORRAR MENSAJE
-                    String linea;
-                    while (!(linea = lectorServidor.readLine()).equals("FIN_LISTA_BORRAR")) {
-                        System.out.println(linea);
-                    }
-                    String primeraRespuesta = lectorServidor.readLine();
-                    if (primeraRespuesta.equals("No tienes mensajes para borrar.")){
-                        System.out.println("Servidor: " + primeraRespuesta);
+                } else if ("3".equals(opcionMenu)) { // BORRAR MENSAJE
+                    String lineaInicial = lectorServidor.readLine();
+                    System.out.println(lineaInicial);
+
+                    if (lineaInicial.contains("No tienes mensajes")) {
                     } else {
-                        System.out.println("Servidor: " + primeraRespuesta);
-                        System.out.print("> ");
+                        String linea;
+                        while (!(linea = lectorServidor.readLine()).equals("FIN_LISTA_BORRAR")) {
+                            System.out.println(linea);
+                        }
+                        System.out.print("Elige el número del mensaje a borrar > ");
                         String seleccion = teclado.readLine();
                         escritor.println(seleccion);
-                        System.out.println("Servidor: " + lectorServidor.readLine());
+
+                        String confirmacion = lectorServidor.readLine();
+                        System.out.println("Servidor: " + confirmacion);
                     }
 
-                }else if ("4".equals(opcionMenu)) { // SALIR
+                } else if ("4".equals(opcionMenu)) { // SALIR
                     System.out.println("Desconectando del servidor...");
                     break;
 
                 } else {
-                    System.out.println("Opción no válida. Inténtalo de nuevo.");
+                    System.out.println("Servidor: " + lectorServidor.readLine());
                 }
             }
 
@@ -105,5 +105,4 @@ public class Cliente {
         System.out.println("[4] Salir");
         System.out.print("> ");
     }
-
 }
