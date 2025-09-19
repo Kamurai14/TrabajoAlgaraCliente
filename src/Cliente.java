@@ -82,7 +82,14 @@ public class Cliente {
                         System.out.println("Servidor: " + confirmacion);
                     }
 
-                } else if ("4".equals(opcionMenu)) { // SALIR
+                }else if ("4".equals(opcionMenu)) { //BORRAR TODOS LOS MENSAJES ENVIADOS
+                    System.out.println("Servidor: " + lectorServidor.readLine());
+                    System.out.print("> ");
+                    String confirmacion = teclado.readLine();
+                    escritor.println(confirmacion);
+                    System.out.println("Servidor: " + lectorServidor.readLine());
+
+                } else if ("5".equals(opcionMenu)) { // SALIR
                     System.out.println("Desconectando del servidor...");
                     break;
 
@@ -102,7 +109,8 @@ public class Cliente {
         System.out.println("[1] Enviar un mensaje a otro usuario");
         System.out.println("[2] Leer mis mensajes");
         System.out.println("[3] Borrar un mensaje");
-        System.out.println("[4] Salir");
+        System.out.println("[4] Borrar todos los mensajes");
+        System.out.println("[5] Salir");
         System.out.print("> ");
     }
 }
