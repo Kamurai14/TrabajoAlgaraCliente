@@ -89,7 +89,13 @@ public class Cliente {
                     escritor.println(confirmacion);
                     System.out.println("Servidor: " + lectorServidor.readLine());
 
-                } else if ("5".equals(opcionMenu)) { // SALIR
+                } else if ("5".equals(opcionMenu)) { //BLOQUEAR A UN USUARIO
+                    System.out.println("Servidor: " + lectorServidor.readLine());
+                    System.out.println(">");
+                    String usuarioABloquear = teclado.readLine();
+                    escritor.println(usuarioABloquear);
+                    System.out.println("Servidor: " + lectorServidor.readLine());
+                } else if ("6".equals(opcionMenu)) { // SALIR
                     System.out.println("Desconectando del servidor...");
                     break;
 
@@ -110,7 +116,8 @@ public class Cliente {
         System.out.println("[2] Leer mis mensajes");
         System.out.println("[3] Borrar un mensaje");
         System.out.println("[4] Borrar todos los mensajes");
-        System.out.println("[5] Salir");
+        System.out.println("[5] Bloquear a un usuario");
+        System.out.println("[6] Salir");
         System.out.print("> ");
     }
 }
