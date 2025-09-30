@@ -132,6 +132,25 @@ public class Cliente {
                 escritor.println(usuarioABloquear);
                 System.out.println("Servidor: " + lectorServidor.readLine());
                 break;
+            case "6": // SUBIR ARCHIVO
+                System.out.println(lectorServidor.readLine());
+                String nombreArchivo = teclado.readLine();
+                escritor.println(nombreArchivo);
+
+                System.out.println("Introduce la RUTA COMPLETA del archivo en tu PC:");
+                String rutaLocal = teclado.readLine();
+                File archivoLocal = new File(rutaLocal);
+
+                if (archivoLocal.exists() && !archivoLocal.isDirectory()) {
+                    System.out.println(lectorServidor.readLine());
+                    Files.lines(Paths.get(rutaLocal)).forEach(escritor::println);
+                    escritor.println();
+                    System.out.println(lectorServidor.readLine());
+                } else {
+                    escritor.println("CANCELAR_SUBIDA");
+                    System.out.println("Error: El archivo no existe en la ruta especificada.");
+                }
+                break;
             default:
                 System.out.println("Servidor: " + lectorServidor.readLine());
                 break;
