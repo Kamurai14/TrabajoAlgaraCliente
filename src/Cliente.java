@@ -166,6 +166,25 @@ public class Cliente {
                 escritor.println(archivoDescarga);
                 System.out.println(lectorServidor.readLine());
                 break;
+            case "9": // REVISAR PETICIONES
+                String lineaPeticion;
+                while (!(lineaPeticion = lectorServidor.readLine()).equals("FIN_PETICIONES")) {
+                    System.out.println(lineaPeticion);
+                }
+
+                if (!lineaPeticion.contains("No tienes peticiones")) {
+                    System.out.print("> ");
+                    String seleccion = teclado.readLine();
+                    escritor.println(seleccion);
+                    if (!"C".equalsIgnoreCase(seleccion)) {
+                        System.out.println(lectorServidor.readLine());
+                        System.out.print("> ");
+                        String respuesta = teclado.readLine();
+                        escritor.println(respuesta);
+                    }
+                }
+                System.out.println(lectorServidor.readLine());
+                break;
             default:
                 System.out.println("Servidor: " + lectorServidor.readLine());
                 break;
