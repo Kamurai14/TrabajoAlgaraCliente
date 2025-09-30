@@ -60,3 +60,20 @@ public class Cliente {
             System.out.println("Ocurrió un error en el cliente: " + e.getMessage());
         }
     }
+    private static void mostrarMenu() {
+        System.out.println("\n----- MENÚ PRINCIPAL -----");
+        System.out.println("[1] Enviar un mensaje");
+        System.out.println("[2] Leer mis mensajes");
+        System.out.println("[3] Borrar un mensaje");
+        System.out.println("[4] Borrar todos los mensajes");
+        System.out.println("[5] Bloquear a un usuario");
+        System.out.println("--- Gestión de Archivos ---");
+        System.out.println("[6] Subir un archivo");
+        System.out.println("[7] Solicitar ver archivos de otro usuario");
+        System.out.println("[8] Solicitar descargar un archivo");
+        System.out.println("[9] Revisar mis peticiones pendientes");
+        System.out.println("[10] Descargar un archivo aprobado");
+        System.out.println("[11] Salir");
+        System.out.print("> ");
+    }
+}
