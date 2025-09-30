@@ -151,6 +151,21 @@ public class Cliente {
                     System.out.println("Error: El archivo no existe en la ruta especificada.");
                 }
                 break;
+            case "7": // SOLICITAR VER ARCHIVOS
+                System.out.println(lectorServidor.readLine());
+                String propietarioVer = teclado.readLine();
+                escritor.println(propietarioVer);
+                System.out.println(lectorServidor.readLine());
+                break;
+            case "8": // SOLICITAR DESCARGAR ARCHIVO
+                System.out.println(lectorServidor.readLine());
+                String propietarioDescarga = teclado.readLine();
+                escritor.println(propietarioDescarga);
+                System.out.println(lectorServidor.readLine());
+                String archivoDescarga = teclado.readLine();
+                escritor.println(archivoDescarga);
+                System.out.println(lectorServidor.readLine());
+                break;
             default:
                 System.out.println("Servidor: " + lectorServidor.readLine());
                 break;
