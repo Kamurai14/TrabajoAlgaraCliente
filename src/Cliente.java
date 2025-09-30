@@ -76,4 +76,65 @@ public class Cliente {
         System.out.println("[11] Salir");
         System.out.print("> ");
     }
+    private static void manejarOpcionMenu(String opcionMenu, BufferedReader lectorServidor, PrintWriter escritor, BufferedReader teclado) throws IOException {
+        switch (opcionMenu) {
+            case "1": // ENVIAR MENSAJES
+                System.out.println("Servidor: " + lectorServidor.readLine());
+                String destinatario = teclado.readLine();
+                escritor.println(destinatario);
+
+                String respuestaDestinatario = lectorServidor.readLine();
+                System.out.println("Servidor: " + respuestaDestinatario);
+
+                if (!respuestaDestinatario.startsWith("Error:")) {
+                    System.out.println("Escribe tu mensaje:");
+                    String mensaje = teclado.readLine();
+                    escritor.println(mensaje);
+                    System.out.println("Servidor: " + lectorServidor.readLine());
+                }
+                break;
+
+            case "2": // LEER MENSAJES
+                String linea;
+                while (!(linea = lectorServidor.readLine()).equals("FIN_MENSAJES")) {
+                    System.out.println(linea);
+                }
+                break;
+
+            case "3": // BORRAR MENSAJE
+                String lineaInicial = lectorServidor.readLine();
+                System.out.println(lineaInicial);
+
+                if (!lineaInicial.contains("No tienes mensajes")) {
+                    String lineaBorrar;
+                    while (!(lineaBorrar = lectorServidor.readLine()).equals("FIN_LISTA_BORRAR")) {
+                        System.out.println(lineaBorrar);
+                    }
+                    System.out.print("Elige el número del mensaje a borrar > ");
+                    String seleccion = teclado.readLine();
+                    escritor.println(seleccion);
+                    System.out.println("Servidor: " + lectorServidor.readLine());
+                }
+                break;
+
+            case "4": // BORRAR TODOS LOS MENSAJES
+                System.out.println("Servidor: " + lectorServidor.readLine());
+                System.out.print("> ");
+                String confirmacion = teclado.readLine();
+                escritor.println(confirmacion);
+                System.out.println("Servidor: " + lectorServidor.readLine());
+                break;
+
+            case "5": // BLOQUEAR A UN USUARIO
+                System.out.println("Servidor: " + lectorServidor.readLine());
+                System.out.print("> ");
+                String usuarioABloquear = teclado.readLine();
+                escritor.println(usuarioABloquear);
+                System.out.println("Servidor: " + lectorServidor.readLine());
+                break;
+            default:
+                System.out.println("Servidor: " + lectorServidor.readLine());
+                break;
+        }
+    }
 }
