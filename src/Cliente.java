@@ -185,6 +185,34 @@ public class Cliente {
                 }
                 System.out.println(lectorServidor.readLine());
                 break;
+            case "10": // DESCARGAR ARCHIVO APROBADO
+                String lineaDescarga;
+                while (!(lineaDescarga = lectorServidor.readLine()).equals("FIN_DESCARGAS")) {
+                    System.out.println(lineaDescarga);
+                }
+
+                if (!lineaDescarga.contains("No tienes archivos")) {
+                    System.out.print("> ");
+                    String seleccionDescarga = teclado.readLine();
+                    escritor.println(seleccionDescarga);
+
+                    String respuestaServidor = lectorServidor.readLine();
+                    if(respuestaServidor.startsWith("START_DOWNLOAD:")) {
+                        String nombreArchivoDescargado = respuestaServidor.split(":")[1];
+                        String contenidoBase64 = lectorServidor.readLine();
+                        lectorServidor.readLine();
+
+                        byte[] bytesArchivo = Base64.getDecoder().decode(contenidoBase64);
+                        File dirDescargas = new File("client_downloads");
+                        dirDescargas.mkdirs();
+                        Files.write(Paths.get(dirDescargas.getName(), nombreArchivoDescargado), bytesArchivo);
+                        System.out.println("Archivo '" + nombreArchivoDescargado + "' descargado exitosamente en la carpeta 'client_downloads'.");
+
+                    } else {
+                        System.out.println("Servidor: " + respuestaServidor);
+                    }
+                }
+                break;
             default:
                 System.out.println("Servidor: " + lectorServidor.readLine());
                 break;
